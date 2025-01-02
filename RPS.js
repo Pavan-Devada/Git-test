@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")({ sigint: true });
+// const prompt = require("prompt-sync")({ sigint: true });
 
 function winnerChecker(computerChoice, playerChoice) {
     if (computerChoice === playerChoice) {
@@ -70,9 +70,36 @@ function roundsInput() {
     winnerDisplay();
 }
 
+
+
 let listOptions = ["rock", "paper", "scissor"];
 let playerCount = 0;
 let computerCount = 0;
+let container = document.querySelector(".container");
 
-roundsInput();
+//always listening
+container.addEventListener("click", (event) => {
+    target = event.target;
+    switch (target.id) {
+        case "rock":
+            playerSelection = "rock";
+            break;
+        case "paper":
+            playerSelection = "paper";
+            break;
+        case "scissor":
+            playerSelection = "scissor";
+            break;
+    }
+    let computerSelection = getComputerChoice();
+    playround(computerSelection, playerSelection);
+})
+
+let gameEnd = document.querySelector("#stop");
+gameEnd.addEventListener("click", () => {
+    winnerDisplay();
+})
+
+//taking input for number of rounds:
+// roundsInput();
 

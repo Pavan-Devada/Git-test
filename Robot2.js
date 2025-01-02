@@ -1,75 +1,14 @@
-const prompt = require("prompt-sync")();
+// square root function
 
-function winnerChecker(computerChoice, playerChoice) {
-    if (computerChoice === playerChoice) {
-        console.log("It's a tie");
-        return null;
-    } else if (
-        (computerChoice === "rock" && playerChoice === "paper") ||
-        (computerChoice === "paper" && playerChoice === "rock")
-    ) {
-        return "paper";
-    } else if (
-        (computerChoice === "rock" && playerChoice === "scissor") ||
-        (computerChoice === "scissor" && playerChoice === "rock")
-    ) {
-        return "rock";
-    } else if (
-        (computerChoice === "scissor" && playerChoice === "paper") ||
-        (computerChoice === "paper" && playerChoice === "scissor")
-    ) {
-        return "scissor";
+function squareroot(number) {
+    var lo = 0, hi = number;
+    while (lo <= hi) {
+        console.log(lo, hi);
+        var mid = Math.floor((lo + hi) / 2);
+        if (mid * mid > number) hi = mid - 1;
+        else lo = mid + 1;
     }
+    return hi;
 }
 
-function pointEvaluator(winnerOption, computerChoice, playerChoice) {
-    if (!winnerOption) return; // No points awarded for a tie
-    if (winnerOption === computerChoice) {
-        computerCount++;
-    } else {
-        playerCount++;
-    }
-    console.log(`PLAYER: ${playerCount} COMPUTER: ${computerCount}`);
-}
-
-function playround(computerChoice, playerChoice) {
-    console.log(`Computer: ${computerChoice}, Player: ${playerChoice}`);
-    let winnerOption = winnerChecker(computerChoice, playerChoice);
-    pointEvaluator(winnerOption, computerChoice, playerChoice);
-}
-
-function getComputerChoice() {
-    return listOptions[Math.floor(Math.random() * 3)];
-}
-
-function getPlayerChoice() {
-    let playerOption;
-    while (true) {
-        playerOption = prompt("Enter your choice: rock, paper, scissor: ").toLowerCase();
-        if (listOptions.includes(playerOption)) {
-            break;
-        }
-        console.log("Please enter a valid option");
-    }
-    return playerOption;
-}
-
-function roundsInput() {
-    let n = Number(prompt("Enter number of Rounds: "));
-    while (isNaN(n) || n <= 0) {
-        console.log("Please enter a valid positive number.");
-        n = Number(prompt("Enter number of Rounds: "));
-    }
-    while (n > 0) {
-        let computerSelection = getComputerChoice();
-        let playerSelection = getPlayerChoice();
-        playround(computerSelection, playerSelection);
-        n--;
-    }
-}
-
-let listOptions = ["rock", "paper", "scissor"];
-let playerCount = 0;
-let computerCount = 0;
-
-roundsInput();
+console.log(squareroot(37));
