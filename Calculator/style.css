@@ -24,15 +24,18 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: end;
+    background-color:aliceblue;
+    border-radius: 15px;
+    margin-bottom: 7px;
 }
 
 .input, .output{
     text-align: right;
-    height: 40%;
-    ;
+    height: 40%;;
     font-weight: bold;
     padding: 0px 10px;
     box-sizing: border-box;
+    overflow: hidden;
     
 }
 
