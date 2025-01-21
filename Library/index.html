@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-block">
+                <img class="logo"
+                    src="./Resources/images/library-logo-design-featuring-a-sunburst-behind-an-open-book.jpg"
+                    alt="lib logo">
+            </div>
+            <div class="name-block">
+                <p class="name">My Library</p>
+            </div>
+            <button class="addBook" id="addBook">Add Book</button>
+        </div>
+
+        <!-- popup start -->
+        <div class="overlay" id="overlay">
+        </div>
+
+        <div class="popup" id="popup">
+            <input type="text" placeholder="Book Name" id="name">
+            <input type="text" placeholder="Author" id="author">
+            <input type="text" placeholder="Pages" id="pages">
+            <select name="read" id="read">
+                <option value="" disabled selected>Reading status</option>
+                <option value="started">Started</option>
+                <option value="Inprogress">Inprogress</option>
+                <option value="completed">Completed</option>
+
+            </select>
+            <button class="submit" id="submit">Submit</button>
+            <button class="close" id="close">Close</button>
+        </div>
+        <!-- popup end -->
+
+        <div class="main-body">
+            <div class="book-cards">
+                <div class="card">
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div><span class="footer-text">Library 2025</span></div>
+        </footer>
+    </div>
+
+    <script src="./bookInfo.js"></script>
+</body>
+
+</html>
