@@ -41,7 +41,7 @@ body{
     padding: 1.5px;
 }
 
-.name{
+.label{
     font-size: 2.5rem;
     font-weight: 600;
     font-family: "Sour Gummy", sans-serif;
@@ -63,6 +63,51 @@ body{
 .main-body{
     min-height: calc(100vh - 100px);
     padding: 20px;
+}
+
+.card{
+    height: 100px;
+    background-color:#faead8;
+    padding: 10px 30px 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookName{
+    margin-bottom: 10px;
+}
+
+.book-additionalInfo{
+    display: flex;
+}
+
+.authorName, .pages{
+    margin-right: 20px;
+}
+
+.reading-status-red{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: red;
+    box-shadow: 0px 0px 5px 1px #ff0000;
+}
+
+.reading-status-green{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: green;
+    box-shadow: 0px 0px 5px 1px green;
+}
+.reading-status-orange{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #e4ab18;
+    box-shadow: 0px 0px 5px 1px #e4ab18;
 }
 
 .footer{

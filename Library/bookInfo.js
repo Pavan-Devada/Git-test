@@ -32,7 +32,7 @@ submitButton.addEventListener("click", () => {
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pages").value;
     let read = document.getElementById("read").value;
-    Book(title, author, pages, read);
+    newBook(title, author, pages, read);
 
 })
 
@@ -40,7 +40,7 @@ submitButton.addEventListener("click", () => {
 
 let allBooks = [];
 
-function Book(title, author, pages, read) {
+function newBook(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
