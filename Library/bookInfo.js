@@ -57,11 +57,24 @@ submitButton.addEventListener("click", () => {
             displayPopupError(errors, true)
         }
         else {
-            newBook(title, author, pages, read);
-            allBooks.push([this.title, this.author, this.pages, this.read]);
+            if (edit) {
+                let updatedBook = {
+                    id: Number(bookId),
+                    title: title,
+                    author: author,
+                    pages: pages,
+                    read: read,
+                }
+                allBooks[Number(bookId - 1)] = updatedBook;
+                edit = false;
+                removeCards();
+                allBooksreRun();
+            }
+            else {
+                newBook(title, author, pages, read);
+            }
             hidePopup();
         }
-
     }
     else {
         displayPopupError(errors, false);
@@ -87,7 +100,7 @@ function removePopupError() {
 
 //creating cards
 
-function createCard(a, b, c, d) {
+function createCard(book) {
     let bookCards = document.querySelector(".book-cards");
 
     // Create the main card container
@@ -97,12 +110,13 @@ function createCard(a, b, c, d) {
     // Create the book-information container
     const bookInformation = document.createElement('div');
     bookInformation.className = 'book-information';
+    bookInformation.setAttribute("book-id", `${book["id"]}`);
 
     // Create the bookName container
     const bookName = document.createElement('div');
     bookName.className = 'bookName';
     const title = document.createElement('h3');
-    title.textContent = a;
+    title.textContent = `${book["title"]}`;
     bookName.appendChild(title);
 
     // Create the book-additionalInfo container
@@ -111,11 +125,11 @@ function createCard(a, b, c, d) {
 
     const authorName = document.createElement('p');
     authorName.className = 'authorName';
-    authorName.textContent = b;
+    authorName.textContent = `${book["author"]}`;
 
     const pages = document.createElement('p');
     pages.className = 'pages';
-    pages.textContent = c + " pages";
+    pages.textContent = `${book["pages"]} pages`;
 
     bookAdditionalInfo.appendChild(authorName);
     bookAdditionalInfo.appendChild(pages);
@@ -133,12 +147,12 @@ function createCard(a, b, c, d) {
     readingStatus.className = 'reading-status';
 
     const statusIcon = document.createElement('p');
-    statusIcon.className = `status-icon ${d === "notStarted" ? "status-red" : d === "inProgress" ? "status-orange" : "status-green"}`;
+    statusIcon.className = `status-icon ${book["read"] === "notStarted" ? "status-red" : book["read"] === "inProgress" ? "status-orange" : "status-green"}`;
 
 
     const status = document.createElement('p');
     status.className = 'status';
-    status.textContent = `${d === "notStarted" ? "Not Started" : d === "inProgress" ? "In Progress" : "Completed"}`;
+    status.textContent = `${book["read"] === "notStarted" ? "Not Started" : book["read"] === "inProgress" ? "In Progress" : "Completed"}`;
 
     readingStatus.appendChild(statusIcon);
     readingStatus.appendChild(status);
@@ -160,19 +174,22 @@ function createCard(a, b, c, d) {
     bookCards.appendChild(card);
 }
 
-//traversing through cards
-
 //all other content
 
 let allBooks = [];
+let bookId = "";
+let edit = false;
 
 function newBook(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    allBooks.push([this.title, this.author, this.pages, this.read]);
-    createCard(this.title, this.author, this.pages, this.read);
+    book = {
+        id: allBooks.length + 1,
+        title: title,
+        author: author,
+        pages: pages,
+        read: read,
+    }
+    allBooks.push(book);
+    createCard(book);
 }
 
 function defaultBooks() {
@@ -183,5 +200,42 @@ function defaultBooks() {
     newBook("The Alchemist", "Paulo Coelho", "208", "No");
 
 }
-
 defaultBooks();
+
+//editing created cards thorugh event delegation
+let cardEdit = document.querySelector(".book-cards");
+cardEdit.addEventListener("click", (event) => {
+    if (event.target.classList.contains("edit-button")) {
+        edit = true;
+        const bookInfo = event.target.closest(".card").querySelector(".book-information");
+        if (bookInfo) {
+            bookId = bookInfo.getAttribute("book-id");
+        }
+        for (let book of allBooks) {
+            if (book["id"] === Number(bookId)) {
+                let title = document.getElementById("name");
+                let author = document.getElementById("author");
+                let pages = document.getElementById("pages");
+                let read = document.getElementById("read");
+                title.value = book["title"];
+                author.value = book["author"];
+                pages.value = book["pages"];
+                read.value = book["read"];
+            }
+        }
+        unhidePopup();
+    }
+})
+
+//traversing through cards
+function allBooksreRun() {
+    for (let book of allBooks) {
+        edit = true;
+        createCard(book);
+    }
+}
+// allBooksreRun();
+
+function removeCards() {
+    document.querySelectorAll(".card").forEach(e => e.remove());;
+}

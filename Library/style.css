@@ -99,7 +99,7 @@ body{
     width: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 .status-red{
     background-color: red;
@@ -133,6 +133,7 @@ body{
     text-decoration: underline;
     color: purple;
     cursor: pointer;
+    margin: 0px 5px;
 }
 
 .footer{
